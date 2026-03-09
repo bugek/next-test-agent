@@ -1,27 +1,65 @@
-import { AFaqSection } from "../../components/a-faq-section";
-
-const previewItems = [
-  { label: "Primary signal", value: "$128k", detail: "Net uplift since the last release window." },
-  { label: "Momentum", value: "+18%", detail: "Week-on-week momentum across the main surface." },
+const plans = [
+  {
+    name: 'Starter',
+    price: '$19',
+    detail: 'For smaller teams validating calm operational workflows.',
+    badge: 'Good for pilots',
+  },
+  {
+    name: 'Growth',
+    price: '$79',
+    detail: 'For active product teams that need shared state coverage and deeper visibility.',
+    badge: 'Most popular',
+  },
+  {
+    name: 'Scale',
+    price: '$199',
+    detail: 'For organizations rolling the modernized system across multiple workstreams.',
+    badge: 'Enterprise-ready',
+  },
 ];
-
-const pageStyles = {
-  shell: { minHeight: "100vh", padding: "4rem 1.5rem", background: "linear-gradient(180deg, #f5efe4 0%, #ebe4d8 100%)", color: "#1f2937" },
-  hero: { maxWidth: "56rem", margin: "0 auto 2rem", padding: "2rem", borderRadius: "28px", background: "#fffaf0", boxShadow: "0 24px 60px rgba(15, 23, 42, 0.12)" },
-  eyebrow: { margin: 0, textTransform: "uppercase", letterSpacing: "0.18em", fontSize: "0.72rem", color: "#0f766e" },
-  title: { margin: "0.75rem 0 0", fontSize: "clamp(2.5rem, 6vw, 4.75rem)", lineHeight: 0.95 },
-  description: { maxWidth: "42rem", margin: "1rem 0 0", fontSize: "1.05rem", color: "#5b6470" },
-};
 
 export default function PricingPage() {
   return (
-    <main style={pageStyles.shell}>
-      <section style={pageStyles.hero}>
-        <p style={pageStyles.eyebrow}>Signal-rich dashboard</p>
-        <h1 style={pageStyles.title}>Pricing</h1>
-        <p style={pageStyles.description}>A bold control room layout with clear hierarchy, warm surfaces, and decisive contrast.</p>
+    <main className="page-shell" data-state="success_state">
+      <section className="hero-card two-column-grid">
+        <div className="content-stack">
+          <span className="eyebrow">Pricing</span>
+          <h1 className="display-title">Clear plans in the same modern visual language.</h1>
+          <p className="section-copy">
+            Pricing adopts the refreshed spacing, surface hierarchy, and typography system so plan decisions feel straightforward on desktop and mobile.
+          </p>
+          <div className="state-actions">
+            <span className="hero-pill accent">Calm comparison</span>
+            <span className="hero-pill">Responsive cards</span>
+            <span className="status-pill success">success_state</span>
+          </div>
+        </div>
+        <div className="success-panel tone-success" data-state="success_state">
+          <span className="section-kicker">Decision support</span>
+          <p className="metric-value">3 plans</p>
+          <p className="helper-text">Balanced card hierarchy helps teams compare cost, readiness, and rollout fit at a glance.</p>
+        </div>
       </section>
-      <AFaqSection state="ready" items={previewItems} />
+
+      <section className="card-grid">
+        {plans.map((plan) => (
+          <article key={plan.name} className="metric-card">
+            <span className="status-pill info">{plan.badge}</span>
+            <p className="metric-value">{plan.name}</p>
+            <p className="metric-value">{plan.price}<span className="helper-text"> / month</span></p>
+            <p className="helper-text">{plan.detail}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="section-panel shell-stack" data-state="empty_state">
+        <span className="eyebrow">Empty state example</span>
+        <div className="callout-card tone-empty">
+          <span className="status-pill empty">empty_state</span>
+          <p className="helper-text">No custom quote has been requested yet. Guided plan summaries keep the page useful before sales contact begins.</p>
+        </div>
+      </section>
     </main>
   );
 }

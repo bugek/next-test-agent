@@ -1,36 +1,40 @@
 import type { Metadata } from 'next';
-import { SmartFarmNav } from '../components/SmartFarmNav';
 import './globals.css';
-import packageJson from '../package.json';
+import pkg from '../package.json';
 
 export const metadata: Metadata = {
-  title: 'SmartFarm Dashboard',
-  description: 'A demo-ready SmartFarm monitoring dashboard built with Next.js.',
+  title: 'SmartFarm',
+  description: 'A calm, modern product shell for the SmartFarm experience.',
 };
 
-const appVersion = packageJson.version;
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
-        <SmartFarmNav />
-        {children}
-      
-        <footer
-          style={{
-            padding: "1rem 1.5rem 2rem",
-            textAlign: "center",
-            color: "#6b5a4a",
-            fontSize: "0.95rem",
-          }}
-        >
-          App version v{appVersion}
-        </footer>
+        <div className="site-shell">
+          <header className="site-header">
+            <div className="brand-mark">
+              <span className="brand-badge">S</span>
+              <div className="brand-copy">
+                <span className="brand-title">SmartFarm</span>
+                <span className="brand-subtitle">Calm operational clarity</span>
+              </div>
+            </div>
+            <nav className="site-nav" aria-label="Primary">
+              <a className="nav-link" href="/">Overview</a>
+              <a className="nav-link" href="/github">GitHub</a>
+              <a className="nav-link" href="/pricing">Pricing</a>
+              <span className="version-pill">v{pkg.version}</span>
+            </nav>
+          </header>
+          {children}
+          <footer className="site-footer">
+            <div className="footer-panel">
+              <span>Modernized cool-toned theme system with shared state styling.</span>
+              <span>Responsive shell · version {pkg.version}</span>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );
