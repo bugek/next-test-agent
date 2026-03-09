@@ -5,13 +5,30 @@ type ErrorProps = {
   reset: () => void;
 };
 
-export default function ErrorBoundary({ error, reset }: ErrorProps) {
+export default function GithubError({ error, reset }: ErrorProps) {
+  const state = "error";
+  const supportLabel = state === "error" ? 'Fallback guidance available' : 'Signals stable';
+
   return (
-    <div style={{ padding: "2rem", borderRadius: "24px", background: "#fffaf0", color: "#1f2937" }}>
-      <h2>Something interrupted the signal feed</h2>
-      <p style={{ color: "#5b6470" }}>The page is intact, but the live content could not be refreshed just now.</p>
-      <p style={{ color: "#b91c1c" }}>{error.message}</p>
-      <button type="button" onClick={reset} style={{ marginTop: "1rem" }}>Try again</button>
-    </div>
+    <main className="state-shell" data-state="error_state">
+      <section className="state-panel" data-state="error_state">
+        <span className="eyebrow">GitHub error</span>
+        <h1 className="state-title">Repository activity could not be refreshed.</h1>
+        <p className="muted-copy">
+          The route preserves hierarchy and recovery actions so GitHub failures stay actionable and
+          easy to understand.
+        </p>
+        <div className="callout-card tone-error" data-state="error_state">
+          <span className="status-pill error">error_state</span>
+          <p className="helper-text">{error.message}</p>
+        </div>
+        <div className="state-actions">
+          <button type="button" onClick={reset}>
+            Retry sync
+          </button>
+          <span className="status-pill empty">{supportLabel}</span>
+        </div>
+      </section>
+    </main>
   );
 }

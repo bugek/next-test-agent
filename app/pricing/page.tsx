@@ -1,27 +1,60 @@
-import { AFaqSection } from "../../components/a-faq-section";
-
-const previewItems = [
-  { label: "Primary signal", value: "$128k", detail: "Net uplift since the last release window." },
-  { label: "Momentum", value: "+18%", detail: "Week-on-week momentum across the main surface." },
+const plans = [
+  {
+    name: 'Starter',
+    price: '$29',
+    detail: 'For smaller growing operations that need better visibility fast.',
+    points: ['Core greenhouse metrics', 'Shared loading and error states', 'Mobile-ready dashboards'],
+    tone: 'empty',
+  },
+  {
+    name: 'Growth',
+    price: '$99',
+    detail: 'For teams scaling production with richer signals and cleaner operations.',
+    points: ['Advanced automation insights', 'GitHub and workflow snapshots', 'Priority support'],
+    tone: 'success',
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    detail: 'For multi-site organizations that need tailored reporting and controls.',
+    points: ['Custom integrations', 'Dedicated onboarding', 'Security and governance review'],
+    tone: 'loading',
+  },
 ];
-
-const pageStyles = {
-  shell: { minHeight: "100vh", padding: "4rem 1.5rem", background: "linear-gradient(180deg, #f5efe4 0%, #ebe4d8 100%)", color: "#1f2937" },
-  hero: { maxWidth: "56rem", margin: "0 auto 2rem", padding: "2rem", borderRadius: "28px", background: "#fffaf0", boxShadow: "0 24px 60px rgba(15, 23, 42, 0.12)" },
-  eyebrow: { margin: 0, textTransform: "uppercase", letterSpacing: "0.18em", fontSize: "0.72rem", color: "#0f766e" },
-  title: { margin: "0.75rem 0 0", fontSize: "clamp(2.5rem, 6vw, 4.75rem)", lineHeight: 0.95 },
-  description: { maxWidth: "42rem", margin: "1rem 0 0", fontSize: "1.05rem", color: "#5b6470" },
-};
 
 export default function PricingPage() {
   return (
-    <main style={pageStyles.shell}>
-      <section style={pageStyles.hero}>
-        <p style={pageStyles.eyebrow}>Signal-rich dashboard</p>
-        <h1 style={pageStyles.title}>Pricing</h1>
-        <p style={pageStyles.description}>A bold control room layout with clear hierarchy, warm surfaces, and decisive contrast.</p>
+    <main className="page-shell shell-stack" data-state="success_state">
+      <section className="hero-card">
+        <div className="content-stack">
+          <span className="eyebrow">Pricing</span>
+          <h1 className="display-title">Clear plans for a more polished operations stack.</h1>
+          <p className="section-copy">
+            Pricing now shares the same calm visual system, with stronger hierarchy, better spacing,
+            and responsive cards that remain easy to compare on every screen size.
+          </p>
+          <div className="state-actions">
+            <span className="hero-pill accent">Modern card hierarchy</span>
+            <span className="status-pill success">success_state</span>
+            <span className="version-tag">App v0.1.0 · Next 16.1.6</span>
+          </div>
+        </div>
       </section>
-      <AFaqSection state="ready" items={previewItems} />
+
+      <section className="pricing-grid">
+        {plans.map((plan) => (
+          <article key={plan.name} className={`pricing-card tone-${plan.tone}`} data-state={plan.tone === 'success' ? 'success_state' : plan.tone === 'loading' ? 'loading_state' : 'empty_state'}>
+            <span className="section-kicker">{plan.name}</span>
+            <p className="metric-value">{plan.price}</p>
+            <p className="section-copy">{plan.detail}</p>
+            <ul className="list-reset bullet-list">
+              {plan.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </section>
     </main>
   );
 }
