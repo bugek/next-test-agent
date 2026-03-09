@@ -9,7 +9,7 @@ const artifactRoot = process.env.AI_CODE_AGENT_VISUAL_REVIEW_DIR || path.join(wo
 const manifestPath = process.env.AI_CODE_AGENT_VISUAL_REVIEW_MANIFEST || path.join(artifactRoot, "manifest.json");
 const screenshotDir = process.env.AI_CODE_AGENT_PLAYWRIGHT_SCREENSHOT_DIR || path.join(artifactRoot, "screenshots");
 const baseUrl = process.env.PLAYWRIGHT_BASE_URL || "http://127.0.0.1:3000";
-const command = process.env.PLAYWRIGHT_WEB_SERVER_COMMAND || "npm run dev -- --hostname 127.0.0.1 --port 3000";
+const command = process.env.PLAYWRIGHT_WEB_SERVER_COMMAND || "npm run start -- --hostname 127.0.0.1 --port 3000";
 const startupTimeoutMs = Number(process.env.PLAYWRIGHT_WEB_SERVER_TIMEOUT_MS || "45000");
 
 const routes = [
@@ -70,6 +70,8 @@ async function main() {
   await rm(artifactRoot, { recursive: true, force: true });
   await mkdir(screenshotDir, { recursive: true });
 
+  await ensureProductionBuild();
+
   const server = spawnServer(command);
   try {
     await waitForServer(baseUrl, startupTimeoutMs);
@@ -79,7 +81,10 @@ async function main() {
     for (const entry of routes) {
       for (const capture of entry.captures) {
         const page = await browser.newPage({ viewport: capture.viewport });
-        await page.goto(new URL(entry.route, baseUrl).toString(), { waitUntil: "networkidle" });
+        const response = await page.goto(new URL(entry.route, baseUrl).toString(), { waitUntil: "networkidle" });
+        if (!response || !response.ok()) {
+          throw new Error(`Failed to render ${entry.route}: ${response ? response.status() : "no response"}`);
+        }
         const outputPath = path.join(screenshotDir, capture.fileName);
         await page.screenshot({ path: outputPath, fullPage: true });
 
@@ -108,12 +113,41 @@ async function main() {
   }
 }
 
+async function ensureProductionBuild() {
+  const buildIdPath = path.join(workspaceDir, ".next", "BUILD_ID");
+  try {
+    await readFile(buildIdPath, "utf-8");
+  } catch {
+    await runCommand("npm run build");
+  }
+}
+
 function spawnServer(rawCommand) {
   return spawn(rawCommand, {
     cwd: workspaceDir,
     stdio: "inherit",
     shell: true,
     env: { ...process.env },
+  });
+}
+
+async function runCommand(rawCommand) {
+  await new Promise((resolve, reject) => {
+    const child = spawn(rawCommand, {
+      cwd: workspaceDir,
+      stdio: "inherit",
+      shell: true,
+      env: { ...process.env },
+    });
+
+    child.once("error", reject);
+    child.once("exit", (code) => {
+      if (code === 0) {
+        resolve();
+        return;
+      }
+      reject(new Error(`Command failed (${code ?? "unknown"}): ${rawCommand}`));
+    });
   });
 }
 
