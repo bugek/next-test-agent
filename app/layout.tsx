@@ -1,31 +1,40 @@
+import type { Metadata } from 'next';
 import './globals.css';
-import packageJson from '../package.json';
+import pkg from '../package.json';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'SmartFarm',
-  description: 'A calmer, more modern SmartFarm dashboard experience.',
+  description: 'A calm, modern product shell for the SmartFarm experience.',
 };
-
-const appVersion = packageJson.version;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
-        <div className="shell-backdrop">
-          <div className="app-frame">{children}</div>
+        <div className="site-shell">
+          <header className="site-header">
+            <div className="brand-mark">
+              <span className="brand-badge">S</span>
+              <div className="brand-copy">
+                <span className="brand-title">SmartFarm</span>
+                <span className="brand-subtitle">Calm operational clarity</span>
+              </div>
+            </div>
+            <nav className="site-nav" aria-label="Primary">
+              <a className="nav-link" href="/">Overview</a>
+              <a className="nav-link" href="/github">GitHub</a>
+              <a className="nav-link" href="/pricing">Pricing</a>
+              <span className="version-pill">v{pkg.version}</span>
+            </nav>
+          </header>
+          {children}
+          <footer className="site-footer">
+            <div className="footer-panel">
+              <span>Modernized cool-toned theme system with shared state styling.</span>
+              <span>Responsive shell · version {pkg.version}</span>
+            </div>
+          </footer>
         </div>
-      
-        <footer
-          style={{
-            padding: "1rem 1.5rem 2rem",
-            textAlign: "center",
-            color: "#6b5a4a",
-            fontSize: "0.95rem",
-          }}
-        >
-          App version v{appVersion}
-        </footer>
       </body>
     </html>
   );

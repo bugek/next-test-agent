@@ -1,15 +1,13 @@
 export default function PricingLoading() {
   return (
     <main className="state-shell" data-state="loading_state">
-      <section className="state-panel" data-state="loading_state">
+      <section className="state-panel shell-stack" data-state="loading_state">
         <span className="eyebrow">Pricing loading</span>
-        <h1 className="state-title">Preparing plan comparisons.</h1>
-        <p className="muted-copy">
-          Shared pricing surfaces are loading so tiers remain easy to compare once content is ready.
-        </p>
-        <div className="callout-card tone-loading" data-state="loading_state">
+        <h1 className="state-title">Preparing plan details.</h1>
+        <p className="muted-copy">Plan comparisons and feature summaries are being arranged into the refreshed shell.</p>
+        <div className="callout-card tone-loading">
           <span className="status-pill loading">loading_state</span>
-          <p className="helper-text">The pricing route keeps a polished loading treatment on desktop and mobile.</p>
+          <p className="helper-text">Pricing stays readable while plan data is still loading.</p>
         </div>
         <div className="state-stack" aria-hidden="true">
           <div className="state-bar"><span /></div>

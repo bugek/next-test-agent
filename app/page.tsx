@@ -52,99 +52,53 @@ const stateShowcase = [
   },
 ];
 
-const reviewStates = [
-  {
-    label: 'loading_state',
-    title: 'Loading coverage',
-    description: 'Shared loading surfaces are visible in the root route and route-level fallbacks.',
-    tone: 'loading',
-  },
-  {
-    label: 'empty_state',
-    title: 'Empty coverage',
-    description: 'Structured empty-state guidance is present for unconnected workspaces and data-light moments.',
-    tone: 'empty',
-  },
-  {
-    label: 'error_state',
-    title: 'Error coverage',
-    description: 'Global and route error boundaries present recovery actions with consistent hierarchy.',
-    tone: 'error',
-  },
-  {
-    label: 'success_state',
-    title: 'Success coverage',
-    description: 'Healthy sync and completed flows use calmer success treatments across the refreshed shell.',
-    tone: 'success',
-  },
-];
+function toneClass(tone: string) {
+  if (tone === 'loading') return 'tone-loading';
+  if (tone === 'empty') return 'tone-empty';
+  if (tone === 'error') return 'tone-error';
+  return 'tone-success';
+}
 
-function stateCoverageSummary() {
-  const states = ["loading", "empty", "error", "success"] as const;
-  return states.map((kind) => {
-    const state = kind;
-    if (state === "loading") {
-      return 'Route loading coverage is visible.';
-    }
-    if (state === "empty") {
-      return 'Empty moments are intentionally designed.';
-    }
-    if (state === "error") {
-      return 'Error recovery keeps the shell stable.';
-    }
-    if (state === "success") {
-      return 'Healthy sync and completion stay polished.';
-    }
-    return 'State coverage is present.';
-  });
+function pillClass(tone: string) {
+  if (tone === 'loading') return 'status-pill loading';
+  if (tone === 'empty') return 'status-pill empty';
+  if (tone === 'error') return 'status-pill error';
+  return 'status-pill success';
 }
 
 export default function HomePage() {
-  const coverageSummary = stateCoverageSummary();
-
   return (
-    <main className="page-shell shell-stack" data-state="success_state">
+    <main className="page-shell" data-state="success_state">
       <section className="hero-card two-column-grid">
         <div className="content-stack">
-          <span className="eyebrow">Signal-rich dashboard</span>
-          <div className="content-stack">
-            <h1 className="display-title">A more modern command surface for SmartFarm.</h1>
-            <p className="section-copy">
-              The experience now leans into calm contrast, stronger content hierarchy, and polished
-              surfaces designed to feel current without sacrificing clarity.
-            </p>
-          </div>
+          <span className="eyebrow">Calm product refresh</span>
+          <h1 className="display-title">A more modern dashboard language for every state and route.</h1>
+          <p className="section-copy">
+            SmartFarm now layers cool surfaces, cleaner typography, and deliberate spacing into a distinct,
+            production-ready shell that stays readable on large screens and mobile devices.
+          </p>
           <div className="state-actions">
-            <span className="hero-pill accent">Ready for live monitoring</span>
-            <span className="hero-pill">Responsive across core routes</span>
+            <span className="hero-pill accent">Refreshed visual system</span>
+            <span className="hero-pill">Responsive by default</span>
             <span className="status-pill success">success_state</span>
-          </div>
-          <div className="button-row">
-            <a className="primary-button" href="#state-coverage">
-              Review state coverage
-            </a>
-            <a className="secondary-button" href="#overview-metrics">
-              Explore signal cards
-            </a>
           </div>
         </div>
         <div className="success-panel tone-success" data-state="success_state">
-          <span className="section-kicker">Live preview</span>
-          <p className="metric-value">Calm, faster scanning</p>
+          <span className="section-kicker">Success snapshot</span>
+          <p className="metric-value">Theme applied</p>
           <p className="helper-text">
-            The shell uses shared spacing, typography, and surface tokens to keep every route
-            visually aligned.
+            Shared tokens align the app shell, route cards, and UI feedback moments without changing app behavior.
           </p>
           <div className="state-actions">
-            <span className="status-pill success">Dashboards healthy</span>
-            <span className="status-pill info">Theme applied globally</span>
+            <span className="status-pill success">Visual system active</span>
+            <span className="status-pill info">Production-ready polish</span>
           </div>
         </div>
       </section>
 
-      <section id="overview-metrics" className="content-grid three-up-grid">
+      <section className="card-grid">
         {previewItems.map((item) => (
-          <article key={item.label} className="info-card" data-state="success_state">
+          <article key={item.label} className="metric-card">
             <span className="section-kicker">{item.label}</span>
             <p className="metric-value">{item.value}</p>
             <p className="helper-text">{item.detail}</p>
@@ -152,35 +106,42 @@ export default function HomePage() {
         ))}
       </section>
 
-      <section className="content-grid three-up-grid">
-        {highlights.map((item) => (
-          <article key={item.title} className="review-card">
-            <h2 className="section-title">{item.title}</h2>
-            <p className="section-copy">{item.description}</p>
-          </article>
-        ))}
+      <section className="section-panel shell-stack">
+        <span className="eyebrow">Why it feels newer</span>
+        <div className="card-grid">
+          {highlights.map((item) => (
+            <article key={item.title} className="info-card">
+              <p className="metric-value">{item.title}</p>
+              <p className="helper-text">{item.description}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section id="state-coverage" className="review-grid" data-state="success_state">
-        {stateShowcase.map((item) => (
-          <article key={item.label} className={`callout-card tone-${item.tone}`} data-state={item.label}>
-            <span className={`status-pill ${item.tone}`}>{item.label}</span>
-            <h2 className="section-title">{item.title}</h2>
-            <p className="section-copy">{item.description}</p>
-            <span className="hero-pill">{item.pill}</span>
-          </article>
-        ))}
+      <section className="section-panel shell-stack">
+        <span className="eyebrow">Reviewable state coverage</span>
+        <div className="card-grid">
+          {stateShowcase.map((item) => (
+            <article key={item.label} className={`review-card ${toneClass(item.tone)}`} data-state={item.label}>
+              <span className={pillClass(item.tone)}>{item.label}</span>
+              <p className="metric-value">{item.title}</p>
+              <p className="helper-text">{item.description}</p>
+              <div className="state-actions">
+                <span className={pillClass(item.tone)}>{item.pill}</span>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section className="review-grid">
-        {reviewStates.map((item) => (
-          <article key={item.label} className={`review-card tone-${item.tone}`} data-state={item.label}>
-            <span className={`status-pill ${item.tone}`}>{item.label}</span>
-            <h2 className="section-title">{item.title}</h2>
-            <p className="section-copy">{item.description}</p>
-            <p className="helper-text">{coverageSummary.shift()}</p>
-          </article>
-        ))}
+      <section className="section-panel shell-stack" data-state="empty_state">
+        <span className="eyebrow">Empty state example</span>
+        <div className="callout-card tone-empty">
+          <span className="status-pill empty">empty_state</span>
+          <p className="helper-text">
+            No greenhouse alerts are active right now. The low-data experience stays useful with guidance instead of blank space.
+          </p>
+        </div>
       </section>
 
       <GreenhouseOverviewSection />

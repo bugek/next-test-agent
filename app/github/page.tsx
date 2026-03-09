@@ -1,21 +1,18 @@
-export default function GithubPage() {
-  const coverageSummary = ["loading", "empty", "error", "success"].map((kind) => {
-    const state = kind;
-    if (state === "loading") {
-      return 'Repository sync feedback stays visible while checks refresh.';
-    }
-    if (state === "empty") {
-      return 'The route remains useful when review queues are clear.';
-    }
-    if (state === "error") {
-      return 'Recovery guidance is available when repository signals fail.';
-    }
-    if (state === "success") {
-      return 'Healthy delivery states keep the calmer visual system applied.';
-    }
-    return 'State coverage remains visible.';
-  });
+function toneClass(tone: string) {
+  if (tone === 'loading') return 'tone-loading';
+  if (tone === 'empty') return 'tone-empty';
+  if (tone === 'error') return 'tone-error';
+  return 'tone-success';
+}
 
+function pillClass(tone: string) {
+  if (tone === 'loading') return 'status-pill loading';
+  if (tone === 'empty') return 'status-pill empty';
+  if (tone === 'error') return 'status-pill error';
+  return 'status-pill success';
+}
+
+export default function GithubPage() {
   const activity = [
     {
       label: 'Synced repositories',
@@ -61,20 +58,14 @@ export default function GithubPage() {
     },
   ];
 
-  const emptyHighlights = [
-    'No reviews are blocked',
-    'Queues are currently clear',
-    'Notifications stay low-noise',
-  ];
-
   return (
-    <main className="page-shell shell-stack" data-state="success_state">
+    <main className="page-shell" data-state="success_state">
       <section className="hero-card two-column-grid">
         <div className="content-stack">
           <span className="eyebrow">GitHub operations</span>
           <h1 className="display-title">Repository activity with calmer signal design.</h1>
           <p className="section-copy">
-            The GitHub route now follows the same cool-toned visual system with stronger spacing,
+            The GitHub route follows the same cool-toned visual system with stronger spacing,
             cleaner card hierarchy, and clearer state communication for healthy, empty, in-flight,
             and recovery moments.
           </p>
@@ -97,9 +88,9 @@ export default function GithubPage() {
         </div>
       </section>
 
-      <section className="content-grid three-up-grid">
+      <section className="card-grid">
         {activity.map((item) => (
-          <article key={item.label} className="info-card" data-state="success_state">
+          <article key={item.label} className="metric-card">
             <span className="section-kicker">{item.label}</span>
             <p className="metric-value">{item.value}</p>
             <p className="helper-text">{item.detail}</p>
@@ -107,31 +98,27 @@ export default function GithubPage() {
         ))}
       </section>
 
-      <section className="state-grid">
-        <article className="empty-panel tone-empty" data-state="empty_state">
-          <div className="content-stack">
-            <span className="eyebrow">Empty queue</span>
-            <h2 className="section-title">Nothing needs review right now.</h2>
-            <p className="section-copy">
-              Empty moments are treated as positive status, not missing UI. The page keeps hierarchy,
-              reassurance, and a clear summary when no work is waiting.
-            </p>
-          </div>
-          <ul className="list-reset bullet-list">
-            {emptyHighlights.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </article>
+      <section className="section-panel shell-stack">
+        <span className="eyebrow">State timeline</span>
+        <div className="card-grid">
+          {timeline.map((item) => (
+            <article key={item.badge} className={`review-card ${toneClass(item.tone)}`} data-state={item.badge}>
+              <span className={pillClass(item.tone)}>{item.badge}</span>
+              <p className="metric-value">{item.title}</p>
+              <p className="helper-text">{item.copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
-        {timeline.map((item) => (
-          <article key={item.badge} className={`callout-card tone-${item.tone}`} data-state={item.badge}>
-            <span className={`status-pill ${item.tone}`}>{item.badge}</span>
-            <h2 className="section-title">{item.title}</h2>
-            <p className="section-copy">{item.copy}</p>
-            <p className="helper-text">{coverageSummary.shift()}</p>
-          </article>
-        ))}
+      <section className="section-panel shell-stack" data-state="empty_state">
+        <span className="eyebrow">Quiet queue</span>
+        <div className="callout-card tone-empty">
+          <span className="status-pill empty">empty_state</span>
+          <p className="helper-text">
+            No pull requests need attention at the moment, so the route surfaces a calm empty state instead of a sparse table.
+          </p>
+        </div>
       </section>
     </main>
   );
