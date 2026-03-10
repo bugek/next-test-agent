@@ -5,12 +5,12 @@ type ErrorProps = {
   reset: () => void;
 };
 
-export default function ErrorBoundary({ error, reset }: ErrorProps) {
+export default function ErrorBoundary({ error: _error, reset }: ErrorProps) {
   return (
-    <div style={{ padding: "2rem", borderRadius: "24px", background: "#fffaf0", color: "#1f2937" }}>
-      <h2>Something interrupted the signal feed</h2>
-      <p style={{ color: "#5b6470" }}>The page is intact, but the live content could not be refreshed just now.</p>
-      <p style={{ color: "#b91c1c" }}>{error.message}</p>
+    <div style={{ padding: "2rem", borderRadius: "24px", background: "#fffaf5", color: "#2f241c" }}>
+      <h2>This section needs another pass</h2>
+      <p style={{ color: "#6b5a4a" }}>The shell is present, but the content layer hit an unexpected error.</p>
+      <p style={{ color: "#b91c1c" }}>Try again, and if the problem continues, inspect the latest logs or server response.</p>
       <button type="button" onClick={reset} style={{ marginTop: "1rem" }}>Try again</button>
     </div>
   );
