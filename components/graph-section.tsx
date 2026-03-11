@@ -1,16 +1,16 @@
-import { GithubReactFlowWorkspace } from "./react-flow/github-react-flow-workspace";
+import { GraphReactFlowWorkspace } from "./react-flow/graph-react-flow-workspace";
 
-type GithubSectionState = "loading" | "empty" | "error" | "ready";
+type GraphSectionState = "loading" | "empty" | "error" | "ready";
 
-type GithubSectionItem = {
+type GraphSectionItem = {
   label: string;
   value: string;
   detail?: string;
 };
 
-type GithubSectionProps = {
-  state?: GithubSectionState;
-  items?: GithubSectionItem[];
+type GraphSectionProps = {
+  state?: GraphSectionState;
+  items?: GraphSectionItem[];
 };
 
 const sectionStyles = {
@@ -22,12 +22,12 @@ const sectionStyles = {
   workspace: { marginTop: "1.5rem" },
 };
 
-export function GithubSection({ state = "ready", items = [] }: GithubSectionProps) {
+export function GraphSection({ state = "ready", items = [] }: GraphSectionProps) {
   if (state === "loading") {
     return (
       <section style={sectionStyles.shell}>
         <p style={sectionStyles.eyebrow}>Editorial product surface</p>
-        <h2 style={sectionStyles.title}>Github Section</h2>
+        <h2 style={sectionStyles.title}>Graph Section</h2>
         <p style={sectionStyles.description}>Preparing the surface and staging the first interaction states.</p>
       </section>
     );
@@ -37,7 +37,7 @@ export function GithubSection({ state = "ready", items = [] }: GithubSectionProp
     return (
       <section style={sectionStyles.shell}>
         <p style={sectionStyles.eyebrow}>Editorial product surface</p>
-        <h2 style={sectionStyles.title}>Github Section</h2>
+        <h2 style={sectionStyles.title}>Graph Section</h2>
         <div style={sectionStyles.statePanel}>The shell is present, but the content layer hit an unexpected error.</div>
       </section>
     );
@@ -47,7 +47,7 @@ export function GithubSection({ state = "ready", items = [] }: GithubSectionProp
     return (
       <section style={sectionStyles.shell}>
         <p style={sectionStyles.eyebrow}>Editorial product surface</p>
-        <h2 style={sectionStyles.title}>Github Section</h2>
+        <h2 style={sectionStyles.title}>Graph Section</h2>
         <div style={sectionStyles.statePanel}>This section is ready, but it has no content yet. Add the first record to bring it to life.</div>
       </section>
     );
@@ -56,10 +56,10 @@ export function GithubSection({ state = "ready", items = [] }: GithubSectionProp
   return (
     <section style={sectionStyles.shell}>
       <p style={sectionStyles.eyebrow}>Editorial product surface</p>
-      <h2 style={sectionStyles.title}>Github Section</h2>
+      <h2 style={sectionStyles.title}>Graph Section</h2>
       <p style={sectionStyles.description}>Structured for a more intentional first impression than a plain scaffold.</p>
       <div style={sectionStyles.workspace}>
-        <GithubReactFlowWorkspace />
+        <GraphReactFlowWorkspace />
       </div>
     </section>
   );

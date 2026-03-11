@@ -29,7 +29,7 @@ const styles = {
   small: { margin: "0.5rem 0 0", color: "#6b5a4a", lineHeight: 1.55 },
 };
 
-export function GithubReactFlowWorkspace() {
+export function GraphReactFlowWorkspace() {
   const [selectedNodeId, setSelectedNodeId] = useState<string>("pipeline");
 
   const selectedNode = useMemo<Node<GraphNodeData>>(() => nodes.find((node) => node.id === selectedNodeId) ?? nodes[1], [selectedNodeId]);
