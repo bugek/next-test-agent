@@ -1,4 +1,4 @@
-import { graphToneByKind } from "../../lib/graph-data";
+import { graphToneByKind } from "./graph-data";
 
 export function GraphLegend() {
   return (

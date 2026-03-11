@@ -1,4 +1,4 @@
-import { GraphReactFlowWorkspace } from "../react-flow/graph-react-flow-workspace";
+import { NextTestAgentReactFlowWorkspace } from "../react-flow/next-test-agent-react-flow-workspace";
 import { GraphLegend } from "./GraphLegend";
 import { GraphSummary } from "./GraphSummary";
 import { GraphEmptyState } from "./GraphEmptyState";
@@ -16,7 +16,7 @@ export function GraphWorkspace({ hasContent = true }: GraphWorkspaceProps) {
     <div style={{ display: "grid", gap: "1rem" }}>
       <GraphSummary />
       <GraphLegend />
-      <GraphReactFlowWorkspace />
+      <NextTestAgentReactFlowWorkspace />
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function HomePage() {
         <p style={homeStyles.eyebrow}>Graph preview</p>
         <h1 style={homeStyles.title}>SmartFarm operations, mapped.</h1>
         <p style={homeStyles.description}>Open the graph experience to inspect the relationship map, supporting summaries, and state-aware UI that now live in the dedicated route.</p>
-        <Link href="/graph" style={homeStyles.link}>Open graph experience</Link>
+        <Link href="/next-test-agent" style={homeStyles.link}>Open graph experience</Link>
       </section>
     </main>
   );

@@ -4,8 +4,8 @@ import { useMemo, useState } from "react";
 import ReactFlow, { Background, Controls, MarkerType, MiniMap, type Edge, type Node, type OnSelectionChangeParams } from "reactflow";
 import "reactflow/dist/style.css";
 
-import { graphEdges, graphNodes, graphToneByKind } from "../../lib/graph-data";
-import type { GraphNodeData, GraphNodeKind } from "../../lib/graph-types";
+import { graphEdges, graphNodes, graphToneByKind } from "../graph/graph-data";
+import type { GraphNodeData, GraphNodeKind } from "../graph/types";
 
 const toneByKind: Record<GraphNodeKind, { background: string; color: string; border: string }> = graphToneByKind;
 
@@ -29,10 +29,11 @@ const styles = {
   small: { margin: "0.5rem 0 0", color: "#6b5a4a", lineHeight: 1.55 },
 };
 
-export function GraphReactFlowWorkspace() {
+export function NextTestAgentReactFlowWorkspace() {
   const [selectedNodeId, setSelectedNodeId] = useState<string>("pipeline");
 
-  const selectedNode = useMemo<Node<GraphNodeData>>(() => nodes.find((node) => node.id === selectedNodeId) ?? nodes[1], [selectedNodeId]);
+  const fallbackNode = nodes.find((node) => node.id === "pipeline") ?? nodes[0];
+  const selectedNode = useMemo<Node<GraphNodeData>>(() => nodes.find((node) => node.id === selectedNodeId) ?? fallbackNode, [selectedNodeId]);
 
   const handleSelectionChange = ({ nodes: selectedNodes }: OnSelectionChangeParams) => {
     const firstSelectedNode = selectedNodes[0];

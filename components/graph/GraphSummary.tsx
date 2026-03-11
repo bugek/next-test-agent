@@ -1,4 +1,4 @@
-import { graphSummaryItems } from "../../lib/graph-data";
+import { graphSummaryItems } from "./graph-data";
 
 export function GraphSummary() {
   return (

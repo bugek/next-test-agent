@@ -1,16 +1,16 @@
-import { GraphReactFlowWorkspace } from "./react-flow/graph-react-flow-workspace";
+import { NextTestAgentReactFlowWorkspace } from "./react-flow/next-test-agent-react-flow-workspace";
 
-type GraphSectionState = "loading" | "empty" | "error" | "ready";
+type NextTestAgentSectionState = "loading" | "empty" | "error" | "ready";
 
-type GraphSectionItem = {
+type NextTestAgentSectionItem = {
   label: string;
   value: string;
   detail?: string;
 };
 
-type GraphSectionProps = {
-  state?: GraphSectionState;
-  items?: GraphSectionItem[];
+type NextTestAgentSectionProps = {
+  state?: NextTestAgentSectionState;
+  items?: NextTestAgentSectionItem[];
 };
 
 const sectionStyles = {
@@ -22,12 +22,12 @@ const sectionStyles = {
   workspace: { marginTop: "1.5rem" },
 };
 
-export function GraphSection({ state = "ready", items = [] }: GraphSectionProps) {
+export function NextTestAgentSection({ state = "ready", items = [] }: NextTestAgentSectionProps) {
   if (state === "loading") {
     return (
       <section style={sectionStyles.shell}>
         <p style={sectionStyles.eyebrow}>Editorial product surface</p>
-        <h2 style={sectionStyles.title}>Graph Section</h2>
+        <h2 style={sectionStyles.title}>Next Test Agent Section</h2>
         <p style={sectionStyles.description}>Preparing the surface and staging the first interaction states.</p>
       </section>
     );
@@ -37,7 +37,7 @@ export function GraphSection({ state = "ready", items = [] }: GraphSectionProps)
     return (
       <section style={sectionStyles.shell}>
         <p style={sectionStyles.eyebrow}>Editorial product surface</p>
-        <h2 style={sectionStyles.title}>Graph Section</h2>
+        <h2 style={sectionStyles.title}>Next Test Agent Section</h2>
         <div style={sectionStyles.statePanel}>The shell is present, but the content layer hit an unexpected error.</div>
       </section>
     );
@@ -47,7 +47,7 @@ export function GraphSection({ state = "ready", items = [] }: GraphSectionProps)
     return (
       <section style={sectionStyles.shell}>
         <p style={sectionStyles.eyebrow}>Editorial product surface</p>
-        <h2 style={sectionStyles.title}>Graph Section</h2>
+        <h2 style={sectionStyles.title}>Next Test Agent Section</h2>
         <div style={sectionStyles.statePanel}>This section is ready, but it has no content yet. Add the first record to bring it to life.</div>
       </section>
     );
@@ -56,10 +56,10 @@ export function GraphSection({ state = "ready", items = [] }: GraphSectionProps)
   return (
     <section style={sectionStyles.shell}>
       <p style={sectionStyles.eyebrow}>Editorial product surface</p>
-      <h2 style={sectionStyles.title}>Graph Section</h2>
+      <h2 style={sectionStyles.title}>Next Test Agent Section</h2>
       <p style={sectionStyles.description}>Structured for a more intentional first impression than a plain scaffold.</p>
       <div style={sectionStyles.workspace}>
-        <GraphReactFlowWorkspace />
+        <NextTestAgentReactFlowWorkspace />
       </div>
     </section>
   );

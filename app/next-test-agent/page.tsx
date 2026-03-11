@@ -1,4 +1,4 @@
-import { GraphSection } from "../../components/graph-section";
+import { NextTestAgentSection } from "../../components/next-test-agent-section";
 
 const sampleItems = [
   { label: "Sample metric", value: "Example value", detail: "Use this area for clearly labeled sample content or real data." },
@@ -14,16 +14,16 @@ const pageStyles = {
   note: { margin: "1rem 0 0", fontSize: "0.9rem", color: "#6b5a4a" },
 };
 
-export default function GraphPage() {
+export default function NextTestAgentPage() {
   return (
     <main style={pageStyles.shell}>
       <section style={pageStyles.hero}>
         <p style={pageStyles.eyebrow}>Editorial product surface</p>
-        <h1 style={pageStyles.title}>Graph</h1>
+        <h1 style={pageStyles.title}>Next Test Agent</h1>
         <p style={pageStyles.description}>A modern product page with higher contrast, stronger typography, and clear state transitions.</p>
         <p style={pageStyles.note}>Demo content preview until live data is connected.</p>
       </section>
-      <GraphSection state="ready" items={sampleItems} />
+      <NextTestAgentSection state="ready" items={sampleItems} />
     </main>
   );
 }

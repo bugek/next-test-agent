@@ -1,5 +1,5 @@
 import type { Edge, Node } from "reactflow";
-import type { GraphNodeData, GraphNodeKind, GraphSummaryItem } from "./graph-types";
+import type { GraphNodeData, GraphNodeKind, GraphSummaryItem } from "./types";
 
 export const graphToneByKind: Record<GraphNodeKind, { background: string; color: string; border: string }> = {
   source: { background: "#fff7ed", color: "#7c2d12", border: "1px solid rgba(194, 120, 3, 0.28)" },

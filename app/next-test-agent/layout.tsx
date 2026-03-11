@@ -12,12 +12,12 @@ const layoutStyles = {
   content: { maxWidth: "72rem", margin: "0 auto", padding: "1.5rem" },
 };
 
-export default function GraphLayout({ children }: LayoutProps) {
+export default function NextTestAgentLayout({ children }: LayoutProps) {
   return (
     <section style={layoutStyles.shell}>
       <header style={layoutStyles.header}>
         <p style={layoutStyles.eyebrow}>Editorial product surface</p>
-        <h1 style={layoutStyles.title}>Graph</h1>
+        <h1 style={layoutStyles.title}>Next Test Agent</h1>
       </header>
       <div style={layoutStyles.content}>{children}</div>
     </section>
